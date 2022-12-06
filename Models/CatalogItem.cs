@@ -10,12 +10,12 @@
         public CatalogType? CatalogType { get; set; }   
         public CatalogBrand? CatalogBrand { get; set; }
 
-        public CatalogItem(string name, string discription, string pictireUrl, decimal price)
+        public CatalogItem(string name, string discription, decimal price, string pictireUrl)
         {
             Name = name;
             Description = discription;
-            PictureUrl = pictireUrl;
             Price = price;
+            PictureUrl = pictireUrl;           
         }  
     }
 }
