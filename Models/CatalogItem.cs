@@ -10,12 +10,33 @@
         public CatalogType? CatalogType { get; set; }   
         public CatalogBrand? CatalogBrand { get; set; }
 
-        public CatalogItem(string name, string discription, decimal price, string pictireUrl)
+        public CatalogItem(int id, string name, string discription, decimal price, string pictireUrl)
         {
+            Id = id;    
             Name = name;
             Description = discription;
             Price = price;
             PictureUrl = pictireUrl;           
-        }  
+        }
+
+        public void UpdateDetails(CatalogItemDetails details) 
+        {
+            Name = details.Name;
+            Description = details.Description;
+            Price = details.Price;
+        }
+
+        public readonly record struct CatalogItemDetails
+        {
+            public string? Name { get; }
+            public string? Description { get; }
+            public decimal Price { get; }
+
+            public CatalogItemDetails(string? name, decimal price)
+            {
+                Name = name;
+                Price = price;
+            }
+        }       
     }
 }
