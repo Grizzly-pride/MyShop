@@ -1,7 +1,15 @@
+using MyShop.Interfaces;
+using MyShop.Models;
+using MyShop.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//IoC
+builder.Services.AddSingleton(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
+builder.Services.AddSingleton<ICatalogItemViewModelService, CatalogItemViewModelService>();
 
 var app = builder.Build();
 
