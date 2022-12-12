@@ -21,6 +21,10 @@ namespace MyShop.Services
             new(12, "Prism White TShirt", "Prism White TShirt", 12, "/images/products/12.png")
         };
 
+        public LocalCatalofItemRepository() 
+        {
+        }
+
         public List<CatalogItem> GetAll() => _catalogItems;
 
         public CatalogItem? GetById(int id) => _catalogItems.FirstOrDefault(x => x.Id == id);
