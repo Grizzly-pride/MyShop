@@ -8,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //IoC
-builder.Services.AddSingleton(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
-builder.Services.AddSingleton<ICatalogItemViewModelService, CatalogItemViewModelService>();
+builder.Services.AddScoped(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
+builder.Services.AddScoped<ICatalogItemViewModelService, CatalogItemViewModelService>();
 
 var app = builder.Build();
 
