@@ -13,6 +13,8 @@ builder.Services.AddScoped<ICatalogItemViewModelService, CatalogItemViewModelSer
 
 var app = builder.Build();
 
+app.Logger.LogInformation("App Created...");
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -31,5 +33,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Catalog}/{action=Index}/{id?}");
+
+app.Logger.LogDebug("Starting the App...");
 
 app.Run();
