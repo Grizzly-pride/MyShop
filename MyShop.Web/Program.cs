@@ -1,6 +1,7 @@
 using MyShop.Interfaces;
 using MyShop.Models;
 using MyShop.Services;
+using MyShop.Web.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,10 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //IoC
-builder.Services.AddSingleton(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
-builder.Services.AddSingleton<ICatalogItemViewModelService, CatalogItemViewModelService>();
+builder.Services.AddCoreServices();
+builder.Services.AddScoped(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
+builder.Services.AddScoped<ICatalogItemViewModelService, CatalogItemViewModelService>();
 
 var app = builder.Build();
+
+app.Logger.LogInformation("App Created...");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -31,5 +35,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Catalog}/{action=Index}/{id?}");
+
+app.Logger.LogDebug("Starting the App...");
 
 app.Run();
