@@ -1,6 +1,7 @@
 using MyShop.Interfaces;
 using MyShop.Models;
 using MyShop.Services;
+using MyShop.Web.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //IoC
+builder.Services.AddCoreServices();
 builder.Services.AddScoped(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
 builder.Services.AddScoped<ICatalogItemViewModelService, CatalogItemViewModelService>();
 
