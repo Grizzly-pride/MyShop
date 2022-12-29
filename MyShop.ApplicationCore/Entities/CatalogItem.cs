@@ -1,4 +1,4 @@
-﻿namespace MyShop.Models
+﻿namespace MyShop.ApplicationCore.Entities
 {
     public sealed class CatalogItem
     {
@@ -7,29 +7,27 @@
         public string Description { get; set; }
         public string PictureUrl { get; set; }
         public decimal Price { get; set; }
-        public CatalogType? CatalogType { get; set; }   
+        public CatalogType? CatalogType { get; set; }
         public CatalogBrand? CatalogBrand { get; set; }
 
-        public CatalogItem(int id, string name, string discription, decimal price, string pictireUrl)
+        public CatalogItem(int id, string name, string description, decimal price, string pictureUrl)
         {
-            Id = id;    
+            Id = id;
             Name = name;
-            Description = discription;
+            Description = description;
             Price = price;
-            PictureUrl = pictireUrl;           
+            PictureUrl = pictureUrl;
         }
 
-        public void UpdateDetails(CatalogItemDetails details) 
+        public void UpdateDetails(CatalogItemDetails details)
         {
             Name = details.Name;
-            Description = details.Description;
             Price = details.Price;
         }
 
         public readonly record struct CatalogItemDetails
         {
             public string? Name { get; }
-            public string? Description { get; }
             public decimal Price { get; }
 
             public CatalogItemDetails(string? name, decimal price)
@@ -37,6 +35,6 @@
                 Name = name;
                 Price = price;
             }
-        }       
+        }
     }
 }

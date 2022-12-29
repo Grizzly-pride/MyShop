@@ -1,19 +1,48 @@
 using MyShop.Interfaces;
-using MyShop.Models;
+using MyShop.ApplicationCore.Entities;
 using MyShop.Services;
+using MyShop.Infrastructure;
 using MyShop.Web.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
+using MyShop.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//IoC
+#region IoC
 builder.Services.AddCoreServices();
 builder.Services.AddScoped(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
 builder.Services.AddScoped<ICatalogItemViewModelService, CatalogItemViewModelService>();
+Dependencies.ConfigureServices(builder.Configuration, builder.Services);
+#endregion
 
 var app = builder.Build();
+
+app.Logger.LogInformation("Database migration running...");
+
+#region Auto Database Update
+using (var scope = app.Services.CreateScope())
+{
+    var scopedProvider = scope.ServiceProvider;
+    try
+    {
+        var catalogContext = scopedProvider.GetRequiredService<CatalogContext>();
+        if (catalogContext.Database.IsSqlServer())
+        {
+            catalogContext.Database.Migrate();
+        }
+        //await CatalogContextSeed.SeedAsync(catalogContext, app.Logger);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred seeding the DB.");
+    }
+}
+#endregion
 
 app.Logger.LogInformation("App Created...");
 
@@ -23,7 +52,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-}
+}   
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
