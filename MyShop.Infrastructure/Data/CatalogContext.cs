@@ -10,6 +10,5 @@ namespace MyShop.Infrastructure.Data
         public DbSet<CatalogType> CatalogTypes { get; set; }
 
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }
-
     }
 }

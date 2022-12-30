@@ -3,8 +3,6 @@ using MyShop.ApplicationCore.Entities;
 using MyShop.Services;
 using MyShop.Infrastructure;
 using MyShop.Web.Configuration;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Hosting;
 using MyShop.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +33,7 @@ using (var scope = app.Services.CreateScope())
         {
             catalogContext.Database.Migrate();
         }
-        //await CatalogContextSeed.SeedAsync(catalogContext, app.Logger);
+        await CatalogContextSeed.SeedAsync(catalogContext, app.Logger);
     }
     catch (Exception ex)
     {

@@ -2,7 +2,6 @@
 using MyShop.ApplicationCore.Entities;
 using MyShop.Interfaces;
 using MyShop.Models;
-using MyShop.Services;
 
 namespace MyShop.Controllers
 {
