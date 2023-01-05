@@ -3,7 +3,7 @@ using MyShop.Models;
 
 namespace MyShop.Web.Models
 {
-	internal sealed class CatalogIndexViewModel
+	public sealed class CatalogIndexViewModel
 	{
 		public List<CatalogItemViewModel>? CatalogItems { get; set; }
 		public List<SelectListItem>? Brands { get; set; }
