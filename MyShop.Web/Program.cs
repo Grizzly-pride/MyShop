@@ -1,6 +1,4 @@
-using MyShop.ApplicationCore.Interfaces;
 using MyShop.Interfaces;
-using MyShop.ApplicationCore.Entities;
 using MyShop.Services;
 using MyShop.Infrastructure;
 using MyShop.Web.Configuration;

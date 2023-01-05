@@ -3,6 +3,7 @@ using MyShop.ApplicationCore.Entities;
 using MyShop.ApplicationCore.Interfaces;
 using MyShop.Interfaces;
 using MyShop.Models;
+using MyShop.Web.Models;
 
 namespace MyShop.Controllers
 {
@@ -19,11 +20,11 @@ namespace MyShop.Controllers
             _catalogItemViewModelService = catalogItemViewModel;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(CatalogIndexViewModel model)
         {
-            var catalogItemsViewModel = await _catalogItemViewModelService.GetCatalogItems();
+            var viewModel = await _catalogItemViewModelService.GetCatalogItems(model.BrandFilterApplied, model.TypeFilterApplied);
                 
-            return View(catalogItemsViewModel);
+            return View(viewModel);
         }
 
         public IActionResult Details(int id) 
