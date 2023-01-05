@@ -64,17 +64,20 @@ namespace MyShop.Services
 			return items;
 		}
 
-		public async Task<CatalogIndexViewModel> GetCatalogItems()
+		public async Task<CatalogIndexViewModel> GetCatalogItems(int? brandId, int? typeId)
 		{
 			var entities = await _catalogItemRepository.GetAllAsync();
 
-            var catalogitems =  entities.Select(item => new CatalogItemViewModel()
-            {
-                Id= item.Id,
-                Name = item.Name,
-                PictureUrl= item.PictureUrl,
-                Price= item.Price,
-            }).ToList();
+            var catalogitems = entities
+                .Where(item => (!brandId.HasValue || item.CatalogBrandId == brandId)
+                &&(!typeId.HasValue || item.CatalogTypeId == typeId))
+                .Select(item => new CatalogItemViewModel()
+                {
+                    Id= item.Id,
+                    Name = item.Name,
+                    PictureUrl= item.PictureUrl,
+                    Price= item.Price,
+                }).ToList();
 
             var vm = new CatalogIndexViewModel()
             {
