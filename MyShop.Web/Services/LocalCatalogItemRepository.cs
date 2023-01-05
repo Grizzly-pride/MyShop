@@ -1,9 +1,9 @@
 ﻿using MyShop.ApplicationCore.Entities;
-using MyShop.Interfaces;
+using MyShop.ApplicationCore.Interfaces;
 
 namespace MyShop.Services
 {
-    public sealed class LocalCatalofItemRepository : IRepository<CatalogItem>
+    public sealed class LocalCatalogItemRepository : IRepository<CatalogItem>
     {
         private static List<CatalogItem> _catalogItems = new()
         {
@@ -21,13 +21,18 @@ namespace MyShop.Services
             new(12, "Prism White TShirt", "Prism White TShirt", 12, "/images/products/12.png")
         };
 
-        public LocalCatalofItemRepository() 
+        public LocalCatalogItemRepository() 
         {
         }
 
         public List<CatalogItem> GetAll() => _catalogItems;
 
-        public CatalogItem? GetById(int id) => _catalogItems.FirstOrDefault(x => x.Id == id);
+		public Task<List<CatalogItem>> GetAllAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public CatalogItem? GetById(int id) => _catalogItems.FirstOrDefault(x => x.Id == id);
 
         public void Update(CatalogItem entity) 
         {

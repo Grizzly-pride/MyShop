@@ -8,7 +8,7 @@ using MyShop.Infrastructure.Data;
 
 #nullable disable
 
-namespace MyShop.Infrastructure.Migrations
+namespace MyShop.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CatalogContext))]
     partial class CatalogContextModelSnapshot : ModelSnapshot

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MyShop.Infrastructure.Migrations
+namespace MyShop.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class AddCatalogToDb : Migration

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyShop.ApplicationCore.Entities;
+using MyShop.ApplicationCore.Interfaces;
 using MyShop.Infrastructure.Data;
 
 
@@ -12,6 +14,7 @@ namespace MyShop.Infrastructure
         {
             services.AddDbContext<CatalogContext>(context =>
             context.UseSqlServer(configuration.GetConnectionString("CatalogConnection")));
+            services.AddScoped(typeof(IRepository<>), typeof(EFRepository<>));
         }
     }
 }

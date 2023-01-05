@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MyShop.ApplicationCore.Entities;
-using MyShop.Infrastructure.Data;
 
 
-namespace MyShop.Infrastructure
+namespace MyShop.Infrastructure.Data
 {
     public sealed class CatalogContextSeed
     {
@@ -27,12 +26,12 @@ namespace MyShop.Infrastructure
                 if (!await catalogContext.CatalogItems.AnyAsync())
                 {
                     await catalogContext.CatalogItems.AddRangeAsync(GetPreConfiguredCatalogItems());
-                    await catalogContext.SaveChangesAsync(); 
+                    await catalogContext.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
             {
-                if(retryForAvailability >= 10) throw;
+                if (retryForAvailability >= 10) throw;
 
                 retryForAvailability++;
 
@@ -71,7 +70,7 @@ namespace MyShop.Infrastructure
             };
         }
 
-        private static IEnumerable<CatalogBrand>GetPreConfiguredBrands() 
+        private static IEnumerable<CatalogBrand> GetPreConfiguredBrands()
         {
             return new List<CatalogBrand>
             {

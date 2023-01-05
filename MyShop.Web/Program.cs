@@ -1,3 +1,4 @@
+using MyShop.ApplicationCore.Interfaces;
 using MyShop.Interfaces;
 using MyShop.ApplicationCore.Entities;
 using MyShop.Services;
@@ -8,12 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 #region IoC
+builder.Services.AddControllersWithViews();
 builder.Services.AddCoreServices();
-builder.Services.AddScoped(typeof(IRepository<CatalogItem>), typeof(LocalCatalofItemRepository));
 builder.Services.AddScoped<ICatalogItemViewModelService, CatalogItemViewModelService>();
 Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 #endregion

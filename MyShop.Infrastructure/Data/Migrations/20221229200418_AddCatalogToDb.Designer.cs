@@ -9,7 +9,7 @@ using MyShop.Infrastructure.Data;
 
 #nullable disable
 
-namespace MyShop.Infrastructure.Migrations
+namespace MyShop.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CatalogContext))]
     [Migration("20221229200418_AddCatalogToDb")]

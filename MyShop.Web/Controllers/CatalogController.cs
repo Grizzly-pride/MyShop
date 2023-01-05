@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyShop.ApplicationCore.Entities;
+using MyShop.ApplicationCore.Interfaces;
 using MyShop.Interfaces;
 using MyShop.Models;
 
@@ -9,7 +10,7 @@ namespace MyShop.Controllers
     {
         private readonly ICatalogItemViewModelService _catalogItemViewModelService;
         private readonly IRepository<CatalogItem> _catalogRepository;
-
+        
         public CatalogController(
             IRepository<CatalogItem> catalogRepository,
             ICatalogItemViewModelService catalogItemViewModel)
@@ -18,15 +19,9 @@ namespace MyShop.Controllers
             _catalogItemViewModelService = catalogItemViewModel;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var catalogItemsViewModel = _catalogRepository.GetAll().Select(item => new CatalogItemViewModel()
-            {
-                Id = item.Id,
-                Name = item.Name,
-                PictureUrl= item.PictureUrl,
-                Price= item.Price
-            }).ToList();
+            var catalogItemsViewModel = await _catalogItemViewModelService.GetCatalogItems();
                 
             return View(catalogItemsViewModel);
         }
